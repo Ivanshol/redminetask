@@ -8,6 +8,7 @@ Page objects are located in cypress/integration/page/
 ## How to open the project
 
 Download [VS Code](https://code.visualstudio.com/) or any other IDE of your choice
+
 Download and install [NodeJs](https://nodejs.org/en/about/releases/)
 
 Download the project from the repository
