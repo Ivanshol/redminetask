@@ -38,11 +38,11 @@ context('Redmine', () => {
       RedmineSignUpPage.verifySignUpPageURL().should('eq', 'https://www.redmine.org/account/register');
       RedmineSignUpPage.clickSubmitButton();
       RedmineSignUpPage.verifyThatErrorIsVisibleWhenSigningUpWithEmptyInputs().should('be.visible');
-      cy.get('[id="errorExplanation"] ul li').eq(0).should('have.text', 'Пользователь не может быть пустым');
-      cy.get('[id="errorExplanation"] ul li').eq(1).should('have.text', 'Имя не может быть пустым');
+      cy.get('[id="errorExplanation"] ul li').eq(0).should('have.text', 'Login can\'t be blank');
+      /*cy.get('[id="errorExplanation"] ul li').eq(1).should('have.text', 'Имя не может быть пустым');
       cy.get('[id="errorExplanation"] ul li').eq(2).should('have.text', 'Фамилия не может быть пустым');
       cy.get('[id="errorExplanation"] ul li').eq(3).should('have.text', 'Email не может быть пустым');
-      cy.get('[id="errorExplanation"] ul li').eq(4).should('have.text', 'Пароль недостаточной длины (не может быть меньше 4 символа)');
+      cy.get('[id="errorExplanation"] ul li').eq(4).should('have.text', 'Пароль недостаточной длины (не может быть меньше 4 символа)');*/
       })
 
       it('Should test the wiki tab on-page navigation menu', () => {
@@ -122,10 +122,10 @@ context('Redmine', () => {
       cy.get('div h1').eq(1).should('have.text', 'Redmine¶');
 
       RedmineWikiPage.clickBottomRightNavMenuIndexByNameTab();
-      cy.get('div h2').should('have.text', 'Оглавление');
+      cy.get('div h2').should('have.text', 'Index by title');
 
       RedmineWikiPage.clickBottomRightNavMenuIndexByDateTab();
-      cy.get('div h2').should('have.text', 'История страниц');
+      cy.get('div h2').should('have.text', 'Index by page');
 
       })
 
@@ -149,7 +149,7 @@ context('Redmine', () => {
 
       it('Should test the overiview navigation tab ', () => {
       RedminePage.clickMainNavOverviewTab();
-      cy.get('[id="content"] h2').should('have.text', 'Обзор');
+      cy.get('[id="content"] h2').should('have.text', 'Overview');
         })
 
       it('Should test the download navigation tab ', () => {
@@ -159,22 +159,22 @@ context('Redmine', () => {
 
       it('Should test the activity navigation tab ', () => {
       RedminePage.clickMainNavActivityTab();
-      cy.get('[id="content"] h2').should('have.text', 'Действия');
+      cy.get('[id="content"] h2').should('have.text', 'Activity');
         })
 
       it('Should test the roadmap navigation tab ', () => {
       RedminePage.clickMainNavRoadmapTab();
-      cy.get('[id="content"] h2').should('have.text', 'Оперативный план');      
+      cy.get('[id="content"] h2').should('have.text', 'Roadmap');      
         })
 
       it('Should test the issues navigation tab ', () => {
       RedminePage.clickMainNavIssuesTab();
-      cy.get('[id="content"] h2').should('have.text', 'Задачи');
+      cy.get('[id="content"] h2').should('have.text', 'Issues');
         })
 
       it('Should test the news navigation tab ', () => {
       RedminePage.clickMainNavNewsTab();
-      cy.get('[id="content"] h2').eq(1).should('have.text', 'Новости');
+      cy.get('[id="content"] h2').eq(1).should('have.text', 'News');
         })
 
       it('Should test the wiki navigation tab ', () => {
@@ -184,20 +184,20 @@ context('Redmine', () => {
 
       it('Should test the forums navigation tab ', () => {
       RedminePage.clickMainNavForumsTab();
-      cy.get('[id="content"] h2').should('have.text', 'Форумы');
+      cy.get('[id="content"] h2').should('have.text', 'Forums');
         })
 
       it('Should test the repository navigation tab ', () => {
       RedminePage.clickMainNavRepositoryTab();
-      cy.get('[id="content"] h3').should('have.text', 'Последние редакции');
+      cy.get('[id="content"] h3').should('have.text', 'Latest revisions');
         })
 
       it('Should test the all revisions tab in repository ', () => {
       RedminePage.goToRepository();
       RedmineRepositoryPage.goToAllRevisions();
       cy.get('tr th').eq(0).should('have.text', '#');
-      cy.get('tr th').eq(3).should('have.text', 'Дата');
-      cy.get('tr th').eq(4).should('have.text', 'Автор');
+      cy.get('tr th').eq(3).should('have.text', 'Date');
+      cy.get('tr th').eq(4).should('have.text', 'Author');
         })
 
     })
