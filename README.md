@@ -1,7 +1,24 @@
 # About
 
 This project's goal is testing the redmine website
-It contains 20 tests
+
+It tests following functions:
+
+- Main navigation tabs
+
+- Login function with incorrect inputs
+
+- Login function with empty inputs
+
+- On-page navigation menu
+
+- Search functions
+
+- Issue filtering function
+
+- Wiki page navigation menu
+
+- Repository folders
 
 Page objects are located in cypress/integration/page/
 
@@ -20,6 +37,7 @@ In the terminal, type:
 ```
 
 After some time, cypress will open
+
 In cypress, open cypress/integration folder, and click "redmine.spec.js" file to start running tests
 
-
+In order to view the report you can visit: https://ivanshol.github.io/redminetask/
