@@ -10,9 +10,11 @@
         "chai": "^4.3.6",
         "chromedriver": "^101.0.0",
         "cypress": "^9.6.1",
+        "jest-github-actions-reporter": "^1.0.3",
         "wdio-chromedriver-service": "^7.3.2"
     },
     "scripts": {
-        "wdio": "wdio run wdio.conf.js"
+        "wdio": "wdio run wdio.conf.js",
+        "citest": "CI=true jest --reporters=default --reporters=jest-github-actions-reporter"
     }
 }

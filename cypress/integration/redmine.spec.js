@@ -125,7 +125,7 @@ context('Redmine', () => {
       cy.get('div h2').should('have.text', 'Index by title');
 
       RedmineWikiPage.clickBottomRightNavMenuIndexByDateTab();
-      cy.get('div h2').should('have.text', 'Index by page');
+      cy.get('div h2').should('have.text', 'Index by date');
 
       })
 
