@@ -1,6 +1,6 @@
 class RedmineSignUpPage{
     verifySignUpPageURL(){
-        cy.url().should('eq', 'https://www.redmine.org/account/register');
+        return cy.url();
     }
 
     clickSubmitButton(){
@@ -8,7 +8,7 @@ class RedmineSignUpPage{
     }
 
     verifyThatErrorIsVisibleWhenSigningUpWithEmptyInputs(){
-        cy.get('#errorExplanation').should('be.visible');
+        return cy.get('#errorExplanation');
     }
 
     verifyErrorMessages(){

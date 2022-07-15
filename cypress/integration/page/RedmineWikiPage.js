@@ -28,6 +28,10 @@ class RedmineWikiPage{
     }
 
 
+    verifyTheNavTab(index){
+        return cy.get('[id="content"] h2').eq(index);
+    }
+
     verifyFeaturesNavTab(){
         cy.get('[id="content"] h2').eq(0).should('be.visible');
     }
@@ -66,18 +70,6 @@ class RedmineWikiPage{
 
     clickBottomRightNavMenuIndexByDateTab(){
         cy.get('[href="/projects/redmine/wiki/date_index"]').click();
-    }
-
-    verifyBottomRightMenuHomeTab(){
-        cy.get('div h1').eq(1).should('have.text', 'Redmine¶');
-    }
-
-    verifyBottomRightNavMenuIndexByNameTab(){
-        cy.get('div h2').should('have.text', 'Оглавление');
-    }
-
-    verifyBottomRightNavMenuIndexByDateTab(){
-        cy.get('div h2').should('have.text', 'История страниц');
     }
 }
 

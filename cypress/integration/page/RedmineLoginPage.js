@@ -1,6 +1,6 @@
 class RedmineLoginPage{
     verifyLoginPageURL(){
-        cy.url().should('eq', 'https://www.redmine.org/login');
+        return cy.url();
     }
 
     typeIncorrectDataToUsernameField(){
@@ -16,7 +16,7 @@ class RedmineLoginPage{
     }
 
     verifyThatTheErrorIsVisible(){
-        cy.get('[class="flash error"]').should('be.visible');
+        return cy.get('[class="flash error"]');
     }
 }
 

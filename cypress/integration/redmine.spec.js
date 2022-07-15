@@ -19,185 +19,185 @@ context('Redmine', () => {
 
       it('Should test upper navigation menu tabs', () => {
       RedminePage.clickUpperHomeButton();
-      RedminePage.verifyHomePageURL();
+      RedminePage.verifyHomePageURL().should('eq', 'https://www.redmine.org/');
       RedminePage.clickUpperProjectsButton();
-      RedmineProjectsPage.verifyProjectsPageURL();
+      RedmineProjectsPage.verifyProjectsPageURL().should('eq', 'https://www.redmine.org/projects');
       })
 
       it('Should negative test login function with incorrect data', () => {
       RedminePage.clickSignInButton();
-      RedmineLoginPage.verifyLoginPageURL();
+      RedmineLoginPage.verifyLoginPageURL().should('eq', 'https://www.redmine.org/login');;
       RedmineLoginPage.typeIncorrectDataToUsernameField();
       RedmineLoginPage.typeIncorrectDataToPasswordField();
       RedmineLoginPage.clickSignInSubmitButton();
-      RedmineLoginPage.verifyThatTheErrorIsVisible();
+      RedmineLoginPage.verifyThatTheErrorIsVisible().should('be.visible');
         })
   
       it('Should negative test account creation function with empty inputs', () => {
       RedminePage.clickSignUpButton();
-      RedmineSignUpPage.verifySignUpPageURL();
+      RedmineSignUpPage.verifySignUpPageURL().should('eq', 'https://www.redmine.org/account/register');
       RedmineSignUpPage.clickSubmitButton();
-      RedmineSignUpPage.verifyThatErrorIsVisibleWhenSigningUpWithEmptyInputs();
-      RedmineSignUpPage.verifyErrorMessages();
-        })
+      RedmineSignUpPage.verifyThatErrorIsVisibleWhenSigningUpWithEmptyInputs().should('be.visible');
+      cy.get('[id="errorExplanation"] ul li').eq(0).should('have.text', 'Пользователь не может быть пустым');
+      cy.get('[id="errorExplanation"] ul li').eq(1).should('have.text', 'Имя не может быть пустым');
+      cy.get('[id="errorExplanation"] ul li').eq(2).should('have.text', 'Фамилия не может быть пустым');
+      cy.get('[id="errorExplanation"] ul li').eq(3).should('have.text', 'Email не может быть пустым');
+      cy.get('[id="errorExplanation"] ul li').eq(4).should('have.text', 'Пароль недостаточной длины (не может быть меньше 4 символа)');
+      })
 
       it('Should test the wiki tab on-page navigation menu', () => {
       RedmineWikiPage.clickOnFeaturesNavTab();
-      RedmineWikiPage.verifyFeaturesNavTab();
+      RedmineWikiPage.verifyTheNavTab(0).should('be.visible');
 
       RedmineWikiPage.clickOnDocumentationNavTab();
-      RedmineWikiPage.verifyDocumentationNavTab();
+      RedmineWikiPage.verifyTheNavTab(1).should('be.visible');
 
       RedmineWikiPage.clickOnOnlineDemoNavTab();
-      RedmineWikiPage.verifyOnlineDemoNavTab();
+      RedmineWikiPage.verifyTheNavTab(2).should('be.visible');
 
       RedmineWikiPage.clickOnSupportNavTab();
-      RedmineWikiPage.verifySupportNavTab();
+      RedmineWikiPage.verifyTheNavTab(3).should('be.visible');
 
       RedmineWikiPage.clickOnContributingNavTab();
-      RedmineWikiPage.verifyContributingNavTab();
+      RedmineWikiPage.verifyTheNavTab(4).should('be.visible');
 
       RedmineWikiPage.clickOnWhoUsesNavTab();
-      RedmineWikiPage.verifyWhoUsesNavTab();
+      RedmineWikiPage.verifyTheNavTab(5).should('be.visible');
 
       RedmineWikiPage.clickOnRedmineBooksNavTab();
-      RedmineWikiPage.verifyRedmineBooksNavTab();
+      RedmineWikiPage.verifyTheNavTab(6).should('be.visible');
         })
 
       it('Should test the search function', () => {
       RedminePage.inputSearchText();
-      RedminePage.verifySearchFunction();
+      RedminePage.verifySearchFunction().should('include', 'q=Redmine');
         })
 
       it('Should test filtering issues by overwiev tab ', () => {
       RedminePage.goToOverviewTab();
       RedmineOverviewPage.filterIssuesByDefect();
-      RedmineOverviewPage.verifyFilteringByDefect();
+      cy.url().should('eq', 'https://www.redmine.org/projects/redmine/issues?set_filter=1&tracker_id=1');
 
       RedminePage.goToOverviewTab();
       RedmineOverviewPage.filterIssuesByFeature();
-      RedmineOverviewPage.verifyFilteringByFeature();
+      cy.url().should('eq', 'https://www.redmine.org/projects/redmine/issues?set_filter=1&tracker_id=2');
 
       RedminePage.goToOverviewTab();
       RedmineOverviewPage.filterIssuesByPatch();
-      RedmineOverviewPage.verifyFilteringByPatch();
+      cy.url().should('eq', 'https://www.redmine.org/projects/redmine/issues?set_filter=1&tracker_id=3');
 
       RedminePage.goToOverviewTab();
       RedmineOverviewPage.filterIssuesByAllQuestions();
-      RedmineOverviewPage.verifyFilteringByAllQuestions();
+      cy.url().should('eq', 'https://www.redmine.org/projects/redmine/issues?set_filter=1');
         })
 
       it('Should test the resources navigation menu ', () => {
       RedminePage.clickResourcesNavGuideTab()
-      RedminePage.verifyResourcesNavGuideTab();
+      cy.get('div h1').eq(1).should('have.text', 'Redmine guide¶');
 
       RedminePage.clickResourcesNavDevGuideTab();
-      RedminePage.verifyResourcesNavDevGuideTab();
+      cy.get('div h2').should('have.text', 'Developer guide¶');
 
       RedminePage.clickResourcesNavChangelogTab();
-      RedminePage.verifyResourcesNavChangelogTab();
+      cy.get('div h1').eq(1).should('have.text', 'Changelog¶');
 
       RedminePage.clickResourcesNavSecurityTab();
-      RedminePage.verifyResourcesNavSecurityTab();
+      cy.get('div h1').eq(1).should('have.text', 'Redmine Security Advisories¶');
 
       RedminePage.clickResourcesNavHowToTab();
-      RedminePage.verifyResourcesNavHowToTab();
+      cy.get('div h1').eq(1).should('have.text', 'HowTos¶');
 
       RedminePage.clickResourcesNavThemeListTab();
-      RedminePage.verifyResourcesNavThemeListTab();
+      cy.get('div h1').eq(1).should('have.text', 'Redmine theme list¶');
 
       RedminePage.clickResourcesNavPrivacyPolicyTab();
-      RedminePage.verifyResourcesNavPrivacyPolicyTab();
+      cy.get('div h1').eq(1).should('have.text', 'redmine.org privacy policy¶');
 
       RedminePage.clickResourcesNavPluginsTab();
-      RedminePage.verifyResourcesNavPluginsTab();
+      cy.get('div h2').eq(0).should('have.text', 'Plugins Directory');
         })
     
       it('Should test the wiki navigation menu ', () => {
       RedmineWikiPage.clickBottomRightNavMenuHomeTab();
-      RedmineWikiPage.verifyBottomRightMenuHomeTab();
+      cy.get('div h1').eq(1).should('have.text', 'Redmine¶');
 
       RedmineWikiPage.clickBottomRightNavMenuIndexByNameTab();
-      RedmineWikiPage.verifyBottomRightNavMenuIndexByNameTab();
+      cy.get('div h2').should('have.text', 'Оглавление');
 
       RedmineWikiPage.clickBottomRightNavMenuIndexByDateTab();
-      RedmineWikiPage.verifyBottomRightNavMenuIndexByDateTab();
+      cy.get('div h2').should('have.text', 'История страниц');
 
-        })
+      })
 
       it('Should test the wiki repository menu ', () => {
       RedminePage.goToRepository();
       RedmineRepositoryPage.goToBranchFolder();
-      RedmineRepositoryPage.verifyOpeningOfTheBranchFolder();
+      cy.url().should('include', 'branches');
 
       RedmineRepositoryPage.goToRepositoryFromFolder();
       RedmineRepositoryPage.goToSandboxFolder();
-      RedmineRepositoryPage.verifyOpeningOfTheSandboxFolder();
+      cy.url().should('include', 'sandbox');
 
       RedmineRepositoryPage.goToRepositoryFromFolder();
       RedmineRepositoryPage.goToTagsFolder();
-      RedmineRepositoryPage.verifyOpeningOfTheTagsFolder();
+      cy.url().should('include', 'tags');
 
       RedmineRepositoryPage.goToRepositoryFromFolder();
       RedmineRepositoryPage.goToTrunkFolder();
-      RedmineRepositoryPage.verifyOpeningOfTheTrunkFolder();
+      cy.url().should('include', 'trunk');
         })
 
       it('Should test the overiview navigation tab ', () => {
       RedminePage.clickMainNavOverviewTab();
-      RedminePage.checkMainNavOverviewTab();
+      cy.get('[id="content"] h2').should('have.text', 'Обзор');
         })
 
       it('Should test the download navigation tab ', () => {
       RedminePage.clickMainNavDownloadTab();
-      RedminePage.checkMainNavDownloadTab();
+      cy.get('[class="wiki wiki-page"] h1').should('have.text', 'Download¶');
         })
 
       it('Should test the activity navigation tab ', () => {
       RedminePage.clickMainNavActivityTab();
-      RedminePage.checkMainNavActivityTab();
+      cy.get('[id="content"] h2').should('have.text', 'Действия');
         })
 
       it('Should test the roadmap navigation tab ', () => {
-      RedminePage.clickMainNavRoadmapTab();  
-      RedminePage.checkMainNavRoadmapTab();
+      RedminePage.clickMainNavRoadmapTab();
+      cy.get('[id="content"] h2').should('have.text', 'Оперативный план');      
         })
 
       it('Should test the issues navigation tab ', () => {
       RedminePage.clickMainNavIssuesTab();
-      RedminePage.checkMainNavIssuesTab();
+      cy.get('[id="content"] h2').should('have.text', 'Задачи');
         })
 
       it('Should test the news navigation tab ', () => {
       RedminePage.clickMainNavNewsTab();
-      RedminePage.checkMainNavNewsTab();
+      cy.get('[id="content"] h2').eq(1).should('have.text', 'Новости');
         })
 
       it('Should test the wiki navigation tab ', () => {
       RedminePage.clickMainNavWikiTab();
-      RedminePage.checkMainNavWikiTab();
+      cy.get('[id="content"] h2').eq(0).should('have.text', 'Features¶');
         })
 
       it('Should test the forums navigation tab ', () => {
       RedminePage.clickMainNavForumsTab();
-      RedminePage.checkMainNavForumsTab();
+      cy.get('[id="content"] h2').should('have.text', 'Форумы');
         })
 
       it('Should test the repository navigation tab ', () => {
       RedminePage.clickMainNavRepositoryTab();
-      RedminePage.checkMainNavRepositoryTab();
+      cy.get('[id="content"] h3').should('have.text', 'Последние редакции');
         })
 
       it('Should test the all revisions tab in repository ', () => {
       RedminePage.goToRepository();
       RedmineRepositoryPage.goToAllRevisions();
-      RedmineRepositoryPage.verifyAllRevisionsPage();
-        })
-
-      it('Should test the statistics page ', () => {
-      RedminePage.goToRepository();
-      RedmineRepositoryPage.goToStatistics();
-      RedmineRepositoryPage.verifyStatisticsPage();
+      cy.get('tr th').eq(0).should('have.text', '#');
+      cy.get('tr th').eq(3).should('have.text', 'Дата');
+      cy.get('tr th').eq(4).should('have.text', 'Автор');
         })
 
     })
