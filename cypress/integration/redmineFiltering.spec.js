@@ -4,12 +4,14 @@ const { should } = require("chai")
 import RedminePage from './page/RedminePage';
 import RedmineOverviewPage from './page/RedmineOverviewPage';
 
-context('Redmine', () => {
+context('Redmine filtering', () => {
 
     beforeEach(() => {
       cy.visit('https://www.redmine.org/')
     })
     
+    describe('Redmine filtering issues', () => {
+
     it('Should test filtering issues by overwiev tab ', () => {
 
         RedminePage.goToOverviewTab();
@@ -29,5 +31,6 @@ context('Redmine', () => {
         cy.url().should('eq', 'https://www.redmine.org/projects/redmine/issues?set_filter=1');
 
     })
-  
+
+    })
 })

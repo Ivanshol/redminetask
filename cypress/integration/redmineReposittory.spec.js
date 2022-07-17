@@ -4,11 +4,13 @@ const { should } = require("chai")
 import RedminePage from './page/RedminePage';
 import RedmineRepositoryPage from './page/RedmineRepositoryPage';
 
-context('Redmine', () => {
+context('Redmine repository', () => {
 
     beforeEach(() => {
       cy.visit('https://www.redmine.org/')
     })
+
+    describe('Redmine repository wiki menu', () => {
 
     it('Should test the wiki repository menu ', () => {
 
@@ -27,14 +29,18 @@ context('Redmine', () => {
         RedmineRepositoryPage.goToRepositoryFromFolder();
         RedmineRepositoryPage.goToTrunkFolder();
         cy.url().should('include', 'trunk');
-          })
-  
-    it('Should test the all revisions tab in repository ', () => {
+        
+        })
+          
+      it('Should test the revisions tab in repository ', () => {
 
         RedminePage.goToRepository();
         RedmineRepositoryPage.goToAllRevisions();
         cy.get('tr th').eq(0).should('have.text', '#');
         cy.get('tr th').eq(3).should('have.text', 'Date');
         cy.get('tr th').eq(4).should('have.text', 'Author');
+            
         })
+    })
+  
 })

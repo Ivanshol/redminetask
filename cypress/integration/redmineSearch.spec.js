@@ -3,13 +3,13 @@
 const { should } = require("chai")
 import RedminePage from './page/RedminePage';
 
-context('Redmine', () => {
+context('Redmine search', () => {
 
     beforeEach(() => {
       cy.visit('https://www.redmine.org/')
     })
   
-    describe('Redmine website', () => {
+    describe('Redmine website search function', () => {
 
       it('Should test the search function', () => {
 
